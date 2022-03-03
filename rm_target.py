@@ -1,3 +1,5 @@
+#删除目标
+
 import requests
 import json
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -10,6 +12,6 @@ headers = {
     'Content-type': 'application/json'
     'Accept: application/json'
 }
-data = {"target_id_list": ["34dc6768-ee9d-40fa-b000-fbf6e5496e0b"]}
+data = {"target_id_list": ["3ca25d5e-fa76-4414-a5be-a0776bfba241"]}
 data = bytes(json.dumps(data), 'utf-8')
 rep = requests.post(url=api_url, headers=headers, data=data, verify=False)
