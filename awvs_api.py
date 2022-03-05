@@ -48,8 +48,8 @@ def add_scan(target_id):
 
 def get_scans():
     r = requests.get(url=add_scan_url, headers=headers, verify=False).json()
-    scan_id = r["scans"][0]['scan_id']
-    return scan_id
+    for scan_id in r['scans']:
+        print (scan_id['scan_id'])
 
 def get_vul():
     r = requests.get(url=get_vul_url, headers=headers, verify=False).json()
@@ -60,7 +60,7 @@ def main():
     # target_id = add_target()
     # config_target(target_id)
     # add_scan(target_id)
-    # scan_id = get_scans()
+    # get_scans()
     # print (scan_id)
-    get_vul()
+    # get_vul()
 main()
