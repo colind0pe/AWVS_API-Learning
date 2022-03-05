@@ -46,15 +46,25 @@ def add_scan(target_id):
     data = bytes(json.dumps(data), 'utf-8')
     rep = requests.post(url=add_scan_url, headers=headers, data=data, verify=False).json()
 
-def get_scans():
+def get_scans(list_scan_id=[]):
     r = requests.get(url=add_scan_url, headers=headers, verify=False).json()
     for scan_id in r['scans']:
-        print (scan_id['scan_id'])
+        list_scan_id.append(scan_id['scan_id'])
+    return (",".join(list_scan_id))
 
-def get_vul():
+def get_vul(High=0,Medium=0,Low=0):
     r = requests.get(url=get_vul_url, headers=headers, verify=False).json()
     for vuln in r['vulnerabilities']:
-            print('漏洞名称:',vuln['vt_name'],',危险等级:',vuln['severity'])
+        if vuln['severity'] == 3 :
+            High = High + 1
+        if vuln['severity'] == 2 :
+            Medium = Medium + 1
+        if vuln['severity'] == 1 :
+            Low = Low + 1
+        else :
+            continue
+    return High,Medium,Low
+
 
 def main():
     # target_id = add_target()
