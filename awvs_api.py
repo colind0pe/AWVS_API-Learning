@@ -32,13 +32,14 @@ def config_target(target_id):
     data = {
             "description": "Target configuration default values",
             "proxy": {
-                "enabled":"true","protocol":"http","address":"10.200.196.193","port":10809,"username":"","password":""
+                "enabled":"true","protocol":"http","address":"10.77.27.94","port":10809,"username":"","password":""
             },
             "sensor": "false",
             "scan_speed": "fast",
             }
     data = bytes(json.dumps(data), 'utf-8')
     r = requests.patch(url=config_url, headers=headers, data=data, verify=False)
+    return r.status_code
 
 def add_scan(target_id):
     data = {"target_id": target_id, "profile_id": profile_id, "incremental": False,
@@ -50,7 +51,7 @@ def get_scans(list_scan_id=[]):
     r = requests.get(url=add_scan_url, headers=headers, verify=False).json()
     for scan_id in r['scans']:
         list_scan_id.append(scan_id['scan_id'])
-    return (",".join(list_scan_id))
+    return ("\n".join(list_scan_id))
 
 def get_vul(High=0,Medium=0,Low=0):
     r = requests.get(url=get_vul_url, headers=headers, verify=False).json()
@@ -70,7 +71,8 @@ def main():
     # target_id = add_target()
     # config_target(target_id)
     # add_scan(target_id)
-    # get_scans()
-    # print (scan_id)
-    # get_vul()
+    # list_scan_id = get_scans()
+    # print (list_scan_id)
+    # High,Medium,Low = get_vul()
+    # print(High,Medium,Low)
 main()
