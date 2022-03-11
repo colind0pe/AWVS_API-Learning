@@ -72,9 +72,9 @@ def get_vul(High=0,Medium=0,Low=0):
         if vuln['severity'] == 1 :
             Low = Low + 1
         else :
-            pass
-    vul_num = [High,Medium,Low]
-    return vul_num
+            continue
+        vul_num = {"High":High,"Medium":Medium,"Low":Low}
+        return vul_num
 
 
 def vul_type(sql=0,lfi=0,xss=0,path=0):
@@ -118,10 +118,10 @@ def main():
     # add_scan(target_id)
     # list_scan_id = get_scans()
     # print (list_scan_id)
-    # vul_num = get_vul()
-    # print(vul_num)
-    global vul_type
-    vul_type = vul_type()
-    print (vul_type)
+    vul_num = get_vul()
+    print(vul_num)
+    # global vul_type
+    # vul_type = vul_type()
+    # print (vul_type)
     # get_report()
 main()
